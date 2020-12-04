@@ -90,9 +90,10 @@
           ref="dataForm"
           label-width="80px"
           v-show="type === 'line'"
+          v-if="line.conditionData"
         >
           <el-form-item label="条件">
-            <el-select v-model="line.label" placeholder="请选择">
+            <el-select v-model="line.conditionData.type" placeholder="请选择">
               <el-option
                 v-for="item in statusOptions"
                 :key="item.value"
@@ -102,15 +103,19 @@
               </el-option>
             </el-select>
           </el-form-item>
+          <div class="title">自定义数据</div>
+          <template v-if="line.conditionData.type === 'status1'">
+            <el-form-item label="条件">
+              <el-input v-model="node.name"></el-input>
+            </el-form-item>
+          </template>
+
           <el-form-item>
             <el-button icon="el-icon-close">重置</el-button>
-            <el-button type="primary" icon="el-icon-check" @click="saveLine"
-              >保存</el-button
-            >
+            <el-button type="primary" icon="el-icon-check" @click="saveLine">保存</el-button>
           </el-form-item>
         </el-form>
       </div>
-      <!--            <div class="el-node-form-tag"></div>-->
     </div>
   </div>
 </template>
@@ -139,16 +144,12 @@ export default {
       data: {},
       statusOptions: [
         {
-          value: "条件1",
-          label: "status1"
+          value: "status1",
+          label: "条件1"
         },
         {
-          value: "条件2",
-          label: "status2"
-        },
-        {
-          value: "条件3",
-          label: "status3"
+          value: "status2",
+          label: "条件2"
         }
       ],
       stateList: [
@@ -171,6 +172,12 @@ export default {
       ]
     };
   },
+  props:{
+    flowData:{
+      type: Object, 
+      default: null
+    }
+  },
   methods: {
     /**
      * 表单修改，这里可以根据传入的ID进行业务信息获取
@@ -178,10 +185,9 @@ export default {
      * @param id
      */
     nodeInit(data, id) {
-      console.log("nodeInit", data);
+      console.log(this.flowData);
       this.type = "node";
-      this.data = data;
-      data.nodeList.filter(node => {
+      this.flowData.nodeList.filter(node => {
         if (node.id === id) {
           this.node = { ...node };
         }
@@ -189,20 +195,27 @@ export default {
     },
     lineInit(line) {
       this.type = "line";
-      this.line = line;
+      this.flowData.lineList.forEach(item => {
+        if(item.from === line.from && item.to === line.to){
+          this.line = {...item}
+        }
+      });
+      console.log('this.line55',this.line);
     },
     // 修改连线
     saveLine() {
+      this.line.label = this.statusOptions.find((item => item.value === this.line.conditionData.type)).label
       this.$emit("setLineLabel", this.line.from, this.line.to, this.line.label);
     },
     save() {
-      this.data.nodeList.filter(node => {
+      this.flowData.nodeList.filter(node => {
         if (node.id === this.node.id) {
           node.name = this.node.name;
           node.left = this.node.left;
           node.top = this.node.top;
           node.ico = this.node.ico;
           node.state = this.node.state;       
+          node.conditionData = this.node.conditionData;       
           this.$emit("repaintEverything");
         }
       });

@@ -64,26 +64,26 @@ let dataB = {
         to: 'nodeB',
         label: '条件A',
         conditionData:{
-            type:'type1'
+            type:'status2'
         }
     }, {
         from: 'nodeA',
         to: 'nodeC',
         label: '条件B',
         conditionData:{
-            type:'type1'
+            type:'status1'
         }
     }, {
         from: 'nodeB',
         to: 'nodeD',
         conditionData:{
-            type:'type2'
+            type:'status1'
         }
     }, {
         from: 'nodeC',
         to: 'nodeD',
         conditionData:{
-            type:'type1'
+            type:'status2'
         }
     }
     ]

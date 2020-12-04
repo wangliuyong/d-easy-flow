@@ -103,7 +103,6 @@
               plain
               round
               @click="consoleData"
-              icon="el-icon-refresh"
               size="mini"
               >获取所有节点信息</el-button
             >
@@ -137,6 +136,7 @@
       >
         <flow-node-form
           ref="nodeForm"
+          :flowData="data"
           @setLineLabel="setLineLabel"
           @repaintEverything="repaintEverything"
         ></flow-node-form>
@@ -277,7 +277,8 @@ export default {
           this.$refs.nodeForm.lineInit({
             from: conn.sourceId,
             to: conn.targetId,
-            label: conn.getLabel()
+            label: conn.getLabel(),
+            line:conn,
           });
         });
         // 连线
