@@ -19,7 +19,6 @@ let dataB = {
     
                 }
             },
-            
             des:'',
             position:{
                 left: '18px',
