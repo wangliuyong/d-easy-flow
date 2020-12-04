@@ -105,8 +105,14 @@
           </el-form-item>
           <div class="title">自定义数据</div>
           <template v-if="line.conditionData.type === 'status1'">
-            <el-form-item label="条件">
-              <el-input v-model="node.name"></el-input>
+            <el-form-item label="年龄不得大于">
+              <el-input v-model="line.conditionData.maxAge"></el-input>
+            </el-form-item>
+          </template>
+
+          <template v-if="line.conditionData.type === 'status2'">
+            <el-form-item label="性别必须是">
+              <el-input v-model="line.conditionData.render"></el-input>
             </el-form-item>
           </template>
 
@@ -189,7 +195,7 @@ export default {
       this.type = "node";
       this.flowData.nodeList.filter(node => {
         if (node.id === id) {
-          this.node = { ...node };
+          this.node = { ...cloneDeep(node) };
         }
       });
     },
@@ -197,18 +203,22 @@ export default {
       this.type = "line";
       this.flowData.lineList.forEach(item => {
         if(item.from === line.from && item.to === line.to){
-          this.line = {...item}
+          this.line = {...cloneDeep(item)}
         }
       });
-      console.log('this.line55',this.line);
     },
     // 修改连线
     saveLine() {
       this.line.label = this.statusOptions.find((item => item.value === this.line.conditionData.type)).label
+      this.flowData.lineList.map((line) => {
+        if (line.from === this.line.from && line.to === this.line.to) {
+          line.conditionData = this.line.conditionData
+        }
+      })
       this.$emit("setLineLabel", this.line.from, this.line.to, this.line.label);
     },
     save() {
-      this.flowData.nodeList.filter(node => {
+      this.flowData.nodeList.map(node => {
         if (node.id === this.node.id) {
           node.name = this.node.name;
           node.left = this.node.left;

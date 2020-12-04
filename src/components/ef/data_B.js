@@ -21,9 +21,6 @@ let dataB = {
             left: '351px',
             top: '96px',
             ico: 'el-icon-goods',
-            conditionType:'type2',
-            username:'',
-            age:'',
             state: 'error',
             conditionData:{
                 type:'type2'
@@ -35,10 +32,7 @@ let dataB = {
             type: 'task',
             left: '354px',
             top: '351px',
-            ico: 'el-icon-present',
-            conditionType:'type2',
-            username:'',
-            age:'',
+            ico: 'el-icon-present',        
             state: 'warning',
             conditionData:{
                 type:'type2'
@@ -50,9 +44,6 @@ let dataB = {
             left: '723px',
             top: '215px',
             ico: 'el-icon-present',
-            conditionType:'type1',
-            username:'',
-            age:'',
             state: 'running',
             conditionData:{
                 type:'type1'

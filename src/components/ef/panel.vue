@@ -380,7 +380,6 @@ export default {
       })[0];
 
 
-      console.log('getLinee',conn);
 
       if (!label || label === "") {
         conn.removeClass("flowLabel");
