@@ -78,7 +78,7 @@ export default {
             },
             {
               id: "12",
-              type: "task",
+              type: "task",  
               name: "接口调用",
               ico: "el-icon-odometer",
               // 自定义覆盖样式

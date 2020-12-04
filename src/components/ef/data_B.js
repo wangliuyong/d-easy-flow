@@ -4,15 +4,38 @@ let dataB = {
         {
             id: 'nodeA',
             name: '节点A-不可拖拽',
-            type: 'task',
+            type: 'task',  
             left: '18px',
             top: '223px',
             ico: 'el-icon-user-solid',
             state: 'success',
             viewOnly: true,
             conditionData:{
-                type:'type1'
+                type:'type1',
+                Assigns:{
+
+                },
+                Sign:{
+    
+                }
+            },
+            
+            des:'',
+            position:{
+                left: '18px',
+                top: '223px',
+            },
+            Extension:{
+
+            },
+           
+            Assigns:{
+
+            },
+            Sign:{
+
             }
+
         },
         {
             id: 'nodeB',
@@ -56,7 +79,13 @@ let dataB = {
         label: '条件A',
         conditionData:{
             type:'status2'
-        }
+        },
+
+
+// --------------------------------
+        Conditions:{
+
+        },
     }, {
         from: 'nodeA',
         to: 'nodeC',
