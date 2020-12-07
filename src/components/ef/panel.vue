@@ -8,14 +8,6 @@
           <el-divider direction="vertical"></el-divider>
           <el-button
             type="text"
-            icon="el-icon-delete"
-            size="large"
-            @click="deleteElement"
-            :disabled="!this.activeElement.type"
-          ></el-button>
-          <el-divider direction="vertical"></el-divider>
-          <el-button
-            type="text"
             icon="el-icon-download"
             size="large"
             @click="downloadData"
@@ -94,6 +86,7 @@
           :flowData="data"
           @setLineLabel="setLineLabel"
           @repaintEverything="repaintEverything"
+          :deleteElement="deleteElement.bind(this)"
         ></flow-node-form>
       </div>
     </div>
@@ -367,6 +360,8 @@ export default {
             this.jsPlumb.deleteConnection(conn);
           })
           .catch(() => {});
+      } else{
+        this.$message.error("请选中一个节点或者线！");
       }
     },
     // 删除线
@@ -499,7 +494,6 @@ export default {
       return true;
     },
     clickNode(nodeId) {
-      console.log("clickNode", nodeId);
       this.activeElement.type = "node";
       this.activeElement.nodeId = nodeId;
       this.$refs.nodeForm.nodeInit(this.data, nodeId);

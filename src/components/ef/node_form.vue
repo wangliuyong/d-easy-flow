@@ -77,12 +77,11 @@
             </template>
           </template>
 
-          <el-form-item>
+          <div class="operate-wrap">
+            <el-button type="primary" icon="el-icon-check" @click="save">保存</el-button>
             <el-button icon="el-icon-close">重置</el-button>
-            <el-button type="primary" icon="el-icon-check" @click="save"
-              >保存</el-button
-            >
-          </el-form-item>
+            <el-button icon="el-icon-close" @click="deleteX">删除</el-button>
+          </div>
         </el-form>
         <!-- 连线 -->
         <el-form
@@ -116,10 +115,11 @@
             </el-form-item>
           </template>
 
-          <el-form-item>
-            <el-button icon="el-icon-close">重置</el-button>
+          <div class="operate-wrap">
             <el-button type="primary" icon="el-icon-check" @click="saveLine">保存</el-button>
-          </el-form-item>
+            <el-button type="warning" icon="el-icon-close">重置</el-button>
+            <el-button type="danger" icon="el-icon-close"  @click="deleteX">删除</el-button>
+          </div>
         </el-form>
       </div>
     </div>
@@ -182,9 +182,16 @@ export default {
     flowData:{
       type: Object, 
       default: null
+    },
+    deleteElement:{
+      type: Function, 
+      default: null
     }
   },
   methods: {
+    deleteX(){
+      this.deleteElement()
+    },
     /**
      * 表单修改，这里可以根据传入的ID进行业务信息获取
      * @param data
@@ -251,5 +258,12 @@ export default {
   font-size: 16px;
   font-weight: 800;
   margin: 10px 10px;
+}
+
+.operate-wrap{
+  margin-left: 0!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

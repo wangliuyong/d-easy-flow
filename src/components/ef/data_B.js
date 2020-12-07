@@ -13,10 +13,8 @@ let dataB = {
             conditionData:{
                 type:'type1',
                 Assigns:{
-
                 },
                 Sign:{
-    
                 }
             },
             des:'',
@@ -26,15 +24,7 @@ let dataB = {
             },
             Extension:{
 
-            },
-           
-            Assigns:{
-
-            },
-            Sign:{
-
             }
-
         },
         {
             id: 'nodeB',
@@ -79,8 +69,6 @@ let dataB = {
         conditionData:{
             type:'status2'
         },
-
-
 // --------------------------------
         Conditions:{
 
