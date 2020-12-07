@@ -79,7 +79,7 @@
       </div>
       <!-- 右侧表单 -->
       <div
-        style="width: 300px;border-left: 1px solid #dce3e8;background-color: #FBFBFB"
+        style="width: 450px;border-left: 1px solid #dce3e8;background-color: #fff"
       >
         <flow-node-form
           ref="nodeForm"
@@ -93,6 +93,8 @@
     <!-- 流程数据详情 -->
     <flow-info v-if="flowInfoVisible" ref="flowInfo" :data="data"></flow-info>
     <flow-help v-if="flowHelpVisible" ref="flowHelp"></flow-help>
+
+
    
   </div>
 </template>

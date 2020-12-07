@@ -11,41 +11,31 @@
           ref="dataForm"
           label-width="80px"
           v-show="type === 'node'"
+          label-position="top"
         >
           <div class="title">基本数据</div>
           <el-form-item label="类型">
-            <el-input v-model="node.type" :disabled="true"></el-input>
+           <el-select
+              v-model="node.conditionData.sign"
+              placeholder="请选择"
+            >
+              <el-option
+                v-for="item in signList"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+              </el-select>
           </el-form-item>
           <el-form-item label="名称">
             <el-input v-model="node.name"></el-input>
           </el-form-item>
-          <el-form-item label="left坐标">
-            <el-input v-model="node.left" :disabled="true"></el-input>
-          </el-form-item>
-          <el-form-item label="top坐标">
-            <el-input v-model="node.top" :disabled="true"></el-input>
-          </el-form-item>
-          <el-form-item label="ico图标">
-            <el-input v-model="node.ico"></el-input>
-          </el-form-item>
-
-          <el-form-item label="状态">
-            <el-select v-model="node.state" placeholder="请选择">
-              <el-option
-                v-for="item in stateList"
-                :key="item.state"
-                :label="item.label"
-                :value="item.state"
-              >
-              </el-option>
-            </el-select>
-          </el-form-item>
           <!-- 自定义数据 -->
           <template v-if="node.conditionData">
-            <div class="title">自定义数据</div>
-            <el-form-item label="类型">
+            <el-form-item label="执行操作">
               <el-select
-                v-model="node.conditionData.type"
+                v-model="node.conditionData.operator"
                 placeholder="请选择"
               >
                 <el-option
@@ -57,30 +47,26 @@
                 </el-option>
               </el-select>
             </el-form-item>
-             <!-- type1 -->
-            <template v-if="node.conditionData.type === 'type1'">
-              <el-form-item label="执行人">
-                <el-input v-model="node.conditionData.people"></el-input>
-              </el-form-item>
-              <el-form-item label="备注">
-                <el-input v-model="node.conditionData.note"></el-input>
-              </el-form-item>
-            </template>
-            <!-- type2 -->
-            <template v-if="node.conditionData.type === 'type2'">
-              <el-form-item label="姓名">
-                <el-input v-model="node.conditionData.username"></el-input>
-              </el-form-item>
-              <el-form-item label="年龄">
-                <el-input v-model="node.conditionData.age"></el-input>
-              </el-form-item>
-            </template>
+             <el-form-item label="审核人">
+                <el-select
+                  multiple
+                  v-model="node.conditionData.assigns"
+                  placeholder="请选择"
+                >
+                  <el-option
+                    v-for="item in nodeTypeList"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                </el-option>
+              </el-select>
+            </el-form-item>
           </template>
 
           <div class="operate-wrap">
             <el-button type="primary" icon="el-icon-check" @click="save">保存</el-button>
-            <el-button icon="el-icon-close">重置</el-button>
-            <el-button icon="el-icon-close" @click="deleteX">删除</el-button>
+            <el-button type="danger" icon="el-icon-close" @click="deleteX">删除</el-button>
           </div>
         </el-form>
         <!-- 连线 -->
@@ -89,35 +75,54 @@
           ref="dataForm"
           label-width="80px"
           v-show="type === 'line'"
+          label-position="top"
           v-if="line.conditionData"
         >
-          <el-form-item label="条件">
-            <el-select v-model="line.conditionData.type" placeholder="请选择">
-              <el-option
-                v-for="item in statusOptions"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              >
-              </el-option>
-            </el-select>
+          <div class="title">连线标题</div>
+          <el-form-item label="连线名称">
+            <el-input v-model="line.label"></el-input>
           </el-form-item>
-          <div class="title">自定义数据</div>
-          <template v-if="line.conditionData.type === 'status1'">
-            <el-form-item label="年龄不得大于">
-              <el-input v-model="line.conditionData.maxAge"></el-input>
-            </el-form-item>
+          <div class="title">条件</div>
+          <template v-if="line.conditionData.conditions.length">
+            <div v-for=" (item, index) in line.conditionData.conditions" :key="index">
+              <div class="from-item-wrap">
+                <el-select v-model="item.model" placeholder="用户/部门">
+                  <el-option
+                    v-for="option in statusOptions"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  >
+                  </el-option>
+                </el-select>
+                <el-select v-if="item.model != 1" multiple  v-model="item.symbol" placeholder="">
+                  <el-option
+                    v-for="option in symbolOptions"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  >
+                  </el-option>
+                </el-select>
+                <el-input v-model="item.value"></el-input>
+                <el-select v-model="item.operator">
+                  <el-option
+                    v-for="option in operatorOptions"
+                    :key="option.value"
+                    :label="option.label"
+                    :value="option.value"
+                  >
+                  </el-option>
+                </el-select>
+              </div>
+            </div>
           </template>
-
-          <template v-if="line.conditionData.type === 'status2'">
-            <el-form-item label="性别必须是">
-              <el-input v-model="line.conditionData.render"></el-input>
-            </el-form-item>
-          </template>
-
+          <div class="add-btn-wrap">
+            <el-button type="primary" icon="el-icon-plus" @click="addStatus">添加条件</el-button>
+          </div>
+          
           <div class="operate-wrap">
             <el-button type="primary" icon="el-icon-check" @click="saveLine">保存</el-button>
-            <el-button type="warning" icon="el-icon-close">重置</el-button>
             <el-button type="danger" icon="el-icon-close"  @click="deleteX">删除</el-button>
           </div>
         </el-form>
@@ -145,17 +150,55 @@ export default {
           label: "类型2"
         }
       ],
+      signList:[
+         {
+          value: "串签",
+          label: "串签"
+        },
+        {
+          value: "并签",
+          label: "并签"
+        },
+        {
+          value: "会签",
+          label: "会签"
+        }
+      ],
       node: {},
       line: {},
       data: {},
-      statusOptions: [
+      operatorOptions:[
         {
-          value: "status1",
-          label: "条件1"
+          value: "||",
+          label: "||"
         },
         {
-          value: "status2",
-          label: "条件2"
+          value: "&",
+          label: "&"
+        }
+      ],
+      symbolOptions:[
+        {
+          value: ">",
+          label: "大于"
+        },
+         {
+          value: "=",
+          label: "等于"
+        },
+         {
+          value: "<",
+          label: "小于"
+        },
+      ],
+      statusOptions: [
+        {
+          value: "1",
+          label: "用户"
+        },
+        {
+          value: "2",
+          label: "部门"
         }
       ],
       stateList: [
@@ -210,13 +253,35 @@ export default {
       this.type = "line";
       this.flowData.lineList.forEach(item => {
         if(item.from === line.from && item.to === line.to){
-          this.line = {...cloneDeep(item)}
+          this.line = Object.assign({
+            label:'',
+            conditionData:{
+              conditions:[{ 
+              model: '',
+              symbol: '',
+              values: '',
+              operator: '',
+              extension:''
+              }]
+            } 
+          },{...cloneDeep(item)})
         }
       });
+
+
+      console.log(111,this.line);
+    },
+    addStatus(){
+      this.line.conditionData.conditions.push({
+        model: '',
+        symbol: '',
+        values: '',
+        operator: '',
+        extension:''
+      })
     },
     // 修改连线
     saveLine() {
-      this.line.label = this.statusOptions.find((item => item.value === this.line.conditionData.type)).label
       this.flowData.lineList.map((line) => {
         if (line.from === this.line.from && line.to === this.line.to) {
           line.conditionData = this.line.conditionData
@@ -232,7 +297,7 @@ export default {
           node.top = this.node.top;
           node.ico = this.node.ico;
           node.state = this.node.state;       
-          node.conditionData = this.node.conditionData;       
+          node.conditionData = this.node.conditionData;     
           this.$emit("repaintEverything");
         }
       });
@@ -254,6 +319,10 @@ export default {
   z-index: 0;
 }
 
+.el-form-item{
+  margin: 10px;
+}
+
 .title {
   font-size: 16px;
   font-weight: 800;
@@ -265,5 +334,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.add-btn-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.from-item-wrap{
+  padding: 10px;
+
+  
+}
+
+.from-item-wrap .el-input{
+  width: 100px;
 }
 </style>
