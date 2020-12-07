@@ -44,16 +44,6 @@
               size="mini"
               >流程信息</el-button
             >
-        
-            <el-button
-              type="primary"
-              plain
-              round
-              @click="dataReloadB"
-              icon="el-icon-refresh"
-              size="mini"
-              >切换流程B</el-button
-            >
             <el-button
               type="info"
               plain
