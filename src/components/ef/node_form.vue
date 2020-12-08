@@ -10,7 +10,7 @@
           :model="node"
           ref="dataForm"
           label-width="80px"
-          v-show="type === 'node'"
+          v-if="type === 'node' && node.conditionData"
           label-position="top"
         >
           <div class="title">基本数据</div>
@@ -76,7 +76,7 @@
           label-width="80px"
           v-show="type === 'line'"
           label-position="top"
-          v-if="line.conditionData"
+          v-if="line.conditionData && type == 'line'"
         >
           <div class="title">连线标题</div>
           <el-form-item label="连线名称">
@@ -95,7 +95,7 @@
                   >
                   </el-option>
                 </el-select>
-                <el-select v-if="item.model != 1" multiple  v-model="item.symbol" placeholder="">
+                <el-select v-if="item.model != 1"  v-model="item.symbol" placeholder="">
                   <el-option
                     v-for="option in symbolOptions"
                     :key="option.value"
@@ -170,24 +170,36 @@ export default {
       operatorOptions:[
         {
           value: "||",
-          label: "||"
+          label: "或"
         },
         {
           value: "&",
-          label: "&"
+          label: "且"
         }
       ],
       symbolOptions:[
         {
-          value: ">",
+          value: "Neq",
+          label: "不等于"
+        },
+         {
+          value: "GT",
           label: "大于"
         },
          {
-          value: "=",
-          label: "等于"
+          value: "Egt",
+          label: "大于等于"
         },
-         {
-          value: "<",
+        {
+          value: "Lt",
+          label: "小于"
+        },
+        {
+          value: "Elt",
+          label: "小于等于"
+        },
+        {
+          value: "Like",
           label: "小于"
         },
       ],
