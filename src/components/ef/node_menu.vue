@@ -66,14 +66,12 @@ export default {
             {
               id: "11",
               type: "timer",
-              name: "数据接入",
+              name: "流程开始",
               ico: "el-icon-video-play",
               // 自定义覆盖样式
               style: {},
               conditionData: {
-                type: "type1",
-                username: "",
-                age: ""
+                type: "type1"
               }
             },
             // {
