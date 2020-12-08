@@ -67,7 +67,7 @@ export default {
               id: "11",
               type: "timer",
               name: "数据接入",
-              ico: "el-icon-time",
+              ico: "el-icon-video-play",
               // 自定义覆盖样式
               style: {},
               conditionData: {
@@ -76,19 +76,19 @@ export default {
                 age: ""
               }
             },
-            {
-              id: "12",
-              type: "task",  
-              name: "接口调用",
-              ico: "el-icon-odometer",
-              // 自定义覆盖样式
-              style: {},
-              conditionData: {
-                type: "type2",
-                username: "",
-                age: ""
-              }
-            }
+            // {
+            //   id: "12",
+            //   type: "task",  
+            //   name: "接口调用",
+            //   ico: "el-icon-video-play",
+            //   // 自定义覆盖样式
+            //   style: {},
+            //   conditionData: {
+            //     type: "type2",
+            //     username: "",
+            //     age: ""
+            //   }
+            // }
           ]
         },
         {
@@ -102,18 +102,18 @@ export default {
               id: "21",
               type: "end",
               name: "流程结束",
-              ico: "el-icon-caret-right",
+              ico: "el-icon-switch-button",
               // 自定义覆盖样式
               style: {}
             },
-            {
-              id: "22",
-              type: "over",
-              name: "数据清理",
-              ico: "el-icon-shopping-cart-full",
-              // 自定义覆盖样式
-              style: {}
-            }
+            // {
+            //   id: "22",
+            //   type: "over",
+            //   name: "数据清理",
+            //   ico: "el-icon-switch-button",
+            //   // 自定义覆盖样式
+            //   style: {}
+            // }
           ]
         }
       ],
