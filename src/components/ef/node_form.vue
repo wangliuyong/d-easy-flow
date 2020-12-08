@@ -14,7 +14,23 @@
           label-position="top"
         >
           <div class="title">基本数据</div>
-          <el-form-item label="类型">
+         
+          <el-form-item label="名称">
+            <el-input v-model="node.name"></el-input>
+          </el-form-item>
+
+          <el-form-item label="状态">
+            <el-select  v-model="node.state">
+              <el-option
+                v-for="option in stateList"
+                :key="option.state"
+                :label="option.label"
+                :value="option.state"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+           <el-form-item label="类型">
            <el-select
               v-model="node.conditionData.sign"
               placeholder="请选择"
@@ -27,9 +43,6 @@
               >
               </el-option>
               </el-select>
-          </el-form-item>
-          <el-form-item label="名称">
-            <el-input v-model="node.name"></el-input>
           </el-form-item>
           <!-- 自定义数据 -->
           <template v-if="node.conditionData">
@@ -78,10 +91,12 @@
           label-position="top"
           v-if="line.conditionData && type == 'line'"
         >
-          <div class="title">连线标题</div>
+          <div class="title">基本信息</div>
           <el-form-item label="连线名称">
             <el-input v-model="line.label"></el-input>
           </el-form-item>
+          
+
           <div class="title">条件</div>
           <template v-if="line.conditionData.conditions.length">
             <div v-for=" (item, index) in line.conditionData.conditions" :key="index">

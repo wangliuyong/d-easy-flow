@@ -99,17 +99,7 @@ let dataB = {
   }, {
     from: 'nodeC',
     to: 'nodeD',
-    label: '条件A',
-    conditionData: {
-      type: 'type1',
-      conditions: [{
-        model: '',
-        symbol: '',
-        values: '',
-        operator: '',
-        extension:''
-      }],
-    },
+    label: '条件A-b'
   }
   ]
 }
