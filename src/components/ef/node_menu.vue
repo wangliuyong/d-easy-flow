@@ -71,22 +71,20 @@ export default {
               // 自定义覆盖样式
               style: {},
               conditionData: {
-                type: "type1"
+                type:''
               }
             },
-            // {
-            //   id: "12",
-            //   type: "task",  
-            //   name: "接口调用",
-            //   ico: "el-icon-video-play",
-            //   // 自定义覆盖样式
-            //   style: {},
-            //   conditionData: {
-            //     type: "type2",
-            //     username: "",
-            //     age: ""
-            //   }
-            // }
+            {
+              id: "12",
+              type: "task",  
+              name: "中间节点",
+              ico: "el-icon-setting",
+              // 自定义覆盖样式
+              style: {},
+              conditionData: {
+                type:''
+              }
+            }
           ]
         },
         {
@@ -103,15 +101,7 @@ export default {
               ico: "el-icon-switch-button",
               // 自定义覆盖样式
               style: {}
-            },
-            // {
-            //   id: "22",
-            //   type: "over",
-            //   name: "数据清理",
-            //   ico: "el-icon-switch-button",
-            //   // 自定义覆盖样式
-            //   style: {}
-            // }
+            }
           ]
         }
       ],

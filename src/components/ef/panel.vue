@@ -396,7 +396,6 @@ export default {
      * @param mousePosition 鼠标拖拽结束的坐标
      */
     addNode(evt, nodeMenu, mousePosition) {
-      console.log(evt, nodeMenu, mousePosition);
       var screenX = evt.originalEvent.clientX,
         screenY = evt.originalEvent.clientY;
       let efContainer = this.$refs.efContainer;
@@ -448,6 +447,12 @@ export default {
         conditionData: nodeMenu.conditionData,
         state: "success"
       };
+
+      if(!node.conditionData){
+        node.conditionData = {}
+      }
+
+
       /**
        * 这里可以进行业务判断、是否能够添加该节点
        */

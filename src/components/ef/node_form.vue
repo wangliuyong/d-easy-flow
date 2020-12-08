@@ -315,6 +315,7 @@ export default {
         }
       })
       this.$emit("setLineLabel", this.line.from, this.line.to, this.line.label);
+      this.$message.success("数据已暂存。");
     },
     save() {
       this.flowData.nodeList.map(node => {
@@ -328,6 +329,7 @@ export default {
           this.$emit("repaintEverything");
         }
       });
+      this.$message.success("数据已暂存。");
     }
   }
 };
